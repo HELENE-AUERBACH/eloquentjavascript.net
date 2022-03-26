@@ -1,0 +1,47 @@
+<!doctype html>
+<script>
+  function reverseArray(array) {
+    const newArray = !array ? array : [];
+    if (Array.isArray(array)) {
+      for (let element of array) {
+        newArray.unshift(element);
+      }
+    }
+    return newArray;
+  }
+
+  function reverseArrayInPlace(array) {
+    if (Array.isArray(array)) {
+      const halfSize = Math.floor(array.length / 2);
+      //console.log(halfSize);
+      for (let i = 0, j = array.length - 1; i < halfSize; i++, j--) {
+        [array[j], array[i]] = [array[i], array[j]];
+      }
+    }
+    return array;
+  }
+
+  let arrayValue = ["A", "B", "C"];
+  console.log(reverseArray([])); // → []
+  console.log(reverseArray()); // → undefined
+  console.log(reverseArray(null)); // → null
+  console.log(reverseArray(["A"])); // → ["A"]
+  console.log(reverseArray(["A", "B"])); // → ["B", "A"]
+  console.log(reverseArray(arrayValue)); // → ["C", "B", "A"]
+  console.log(arrayValue); // → ["A", "B", "C"]
+  arrayValue = [1, 2, 3, 4, 5];
+  reverseArrayInPlace(arrayValue);
+  console.log(arrayValue); // → [5, 4, 3, 2, 1]
+  arrayValue = [1, 2];
+  reverseArrayInPlace(arrayValue);
+  console.log(arrayValue); // → [2, 1]
+  arrayValue = [1];
+  reverseArrayInPlace(arrayValue);
+  console.log(arrayValue); // → [1]
+  arrayValue = [];
+  reverseArrayInPlace(arrayValue);
+  console.log(arrayValue); // → []
+  console.log(reverseArrayInPlace()); // → undefined
+  console.log(reverseArrayInPlace(null)); // → null
+</script>
+</html>
