@@ -1,0 +1,95 @@
+<!doctype html>
+<script>
+  function drawLeftTriangle(floorsNumber) {
+    let resultStr = "";
+    for (let countFloor = 0; countFloor < floorsNumber; countFloor++) {
+      let j = countFloor + 1;
+      let i = floorsNumber - countFloor - 1;
+      for (let count = 0; count < i; count++) {
+        resultStr += " ";
+      }
+      for (let count = 0; count < j; count++) {
+        resultStr += "#";
+      }
+      resultStr += "\n";
+    }
+    //console.log(`${resultStr}`);
+    return `${resultStr}`;
+  }
+
+  function drawRightTriangle(floorsNumber) {
+    let resultStr = "";
+    for (let countFloor = 0; countFloor < floorsNumber; countFloor++) {
+      let j = countFloor + 1;
+      for (let count = 0; count < j; count++) {
+        resultStr += "#";
+      }
+      resultStr += "\n";
+    }
+    //console.log(`${resultStr}`);
+    return `${resultStr}`;
+  }
+
+  function drawHalfDiamond(floorsNumber) {
+    let resultStr = "";
+    for (let countFloor = 0; countFloor < floorsNumber; countFloor++) {
+      let k = countFloor;
+      let j = countFloor + 1;
+      let i = floorsNumber - countFloor - 1;
+      for (let count = 0; count < i; count++) {
+        resultStr += " ";
+      }
+      for (let count = 0; count < j; count++) {
+        resultStr += "#";
+      }
+      for (let count = 0; count < k; count++) {
+        resultStr += "#";
+      }
+      resultStr += "\n";
+    }
+    //console.log(`${resultStr}`);
+    return `${resultStr}`;
+  }
+
+  function drawSecondHalfDiamond(floorsNumber, withSupplementarySpace = false) {
+    let resultStr = "";
+    let j = 2 * floorsNumber + 1;
+    for (let countFloor = 0; countFloor < floorsNumber; countFloor++) {
+      let i = withSupplementarySpace ? countFloor + 1 : countFloor;
+      for (let count = 0; count < i; count++) {
+        resultStr += " ";
+      }
+      j -= 2;
+      for (let count = 0; count < j; count++) {
+        resultStr += "#";
+      }
+      resultStr += "\n";
+    }
+    //console.log(`${resultStr}`);
+    return `${resultStr}`;
+  }
+
+  function drawFullDiamond(height) {
+    let resultStr = "";
+    let floorsNumberBelow = Math.max(1, Math.floor(height / 2));
+    let floorsNumber = floorsNumberBelow;
+    let withSupplementarySpace = false;
+    if (height < 3 || height % 2 !== 0) {
+      floorsNumber = floorsNumberBelow + 1;
+      withSupplementarySpace = true;
+    }
+    resultStr = drawHalfDiamond(floorsNumber);
+    resultStr += drawSecondHalfDiamond(floorsNumberBelow, withSupplementarySpace);
+    //console.log(`${resultStr}`);
+    return `${resultStr}`;
+  }
+
+  console.log(drawLeftTriangle(7));
+  console.log(drawRightTriangle(7));
+  console.log(drawHalfDiamond(7));
+  console.log(drawSecondHalfDiamond(7));
+  console.log(drawFullDiamond(7));
+  console.log(drawFullDiamond(8));
+  console.log(drawFullDiamond(2));
+</script>
+</html>
