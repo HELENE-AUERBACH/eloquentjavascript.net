@@ -1,0 +1,75 @@
+<!doctype html>
+<script>
+  function arrayToList(array) {
+    const list = !array ? array : {};
+    if (Array.isArray(array)) {
+      let size = array.length;
+      if (size > 0) {
+        list.value = array[0];
+        if (size === 1) {
+          list.rest = null;
+        } else {
+          list.rest = arrayToList(array.slice(1));
+        }
+      }
+    }
+    return list;
+  }
+
+  function listToArray(list) {
+    let newArray = !list ? list : [];
+    if (typeof list === "object" && list !== null && list.value) {
+      newArray.push(list.value);
+      if (list.rest !== null) {
+        newArray = newArray.concat(listToArray(list.rest));
+      }
+    }
+    return newArray;
+  }
+
+  function prepend(element, list) {
+    return {
+      value: element,
+      rest:
+        list !== null && list !== undefined && list.value !== undefined
+          ? list
+          : null
+    };
+  }
+
+  function nth(list, givenPosition) {
+    let element = undefined;
+    if (
+      typeof list === "object" &&
+      list &&
+      list.value &&
+      !isNaN(givenPosition) &&
+      givenPosition >= 0
+    ) {
+      if (givenPosition === 0) {
+        element = list.value;
+      } else if (list.rest !== null) {
+        element = nth(list.rest, givenPosition - 1);
+      }
+    }
+    return element;
+  }
+
+  console.log(arrayToList([10, 20])); // → {value: 10, rest: {value: 20, rest: null}}
+  console.log(arrayToList([])); // → {}
+  console.log(arrayToList()); // → undefined
+  console.log(arrayToList(null)); // → null
+  console.log(listToArray(arrayToList([10, 20, 30]))); // → [10, 20, 30]
+  console.log(listToArray(arrayToList([]))); // → []
+  console.log(listToArray(arrayToList())); // → undefined
+  console.log(listToArray(arrayToList(null))); // → null
+  console.log(prepend(10, prepend(20, null))); // → {value: 10, rest: {value: 20, rest: null}}
+  console.log(prepend(10, {})); // → {value: 10, rest: null}
+  console.log(prepend(20)); // → {value: 20, rest: null}
+  console.log(prepend(30, null)); // → {value: 30, rest: null}
+  console.log(nth(arrayToList([10, 20, 30]), 1)); // → 20
+  console.log(nth(arrayToList([10, 20, 30]), 0)); // → 10
+  console.log(nth(arrayToList([10, 20, 30]), 2)); // → 30
+  console.log(nth(arrayToList([10, 20, 30]), 10)); // → undefined
+</script>
+</html>
