@@ -1,0 +1,17 @@
+<!doctype html>
+<script>
+  function countChar(aString, characterToBeCounted = "B") {
+    let total = 0;
+    for (let character of aString) {
+      if (character === characterToBeCounted) {
+        total++;
+      }
+    }
+    return total;
+  }
+
+  console.log(countChar("BBC")); // → 2
+  console.log(countChar("kakkerlak", "k")); // → 4
+  console.log(countChar("kakkerlak", "K")); // → 0
+</script>
+</html>
