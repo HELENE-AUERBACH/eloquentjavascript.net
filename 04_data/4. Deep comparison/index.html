@@ -1,0 +1,49 @@
+<!doctype html>
+<script>
+  function deepEqual(value1, value2) {
+    let result = false;
+    if (value1 && value2) {
+      if (typeof value1 === "object" || typeof value2 === "object") {
+        if (typeof value1 === "object" && typeof value2 === "object") {
+          const keys1 = Object.keys(value1);
+          const keys2 = Object.keys(value2);
+          if (keys1.length === keys2.length) {
+            for (let key of keys1) {
+              if (!keys2.includes(key)) {
+                break;
+              } else {
+                //console.log("ici", value1[key], value2[key]);
+                result = deepEqual(value1[key], value2[key]);
+                if (result === false) {
+                  break;
+                }
+              }
+            }
+          }
+        }
+      } else {
+        //console.log("là", value1, value2);
+        result = value1 === value2;
+      }
+    }
+    return result;
+  }
+
+  let obj = { here: { is: "an" }, object: 2 };
+  console.log(deepEqual(obj, obj)); // → true
+  console.log(deepEqual(obj, { here: 1, object: 2 })); // → false
+  console.log(deepEqual(obj, { here: { is: "an" }, object: 2 })); // → true
+  console.log(deepEqual(obj, 1)); // → false
+  console.log(deepEqual(1, 1)); // → true
+  console.log(deepEqual(obj, null)); // → false
+  console.log(deepEqual("Toto", "Toto")); // → true
+  console.log(deepEqual("Toto", 1)); // → false
+  console.log(deepEqual(2, 1)); // → false
+  console.log(deepEqual([], [])); // → false
+  console.log(deepEqual({}, {})); // → false
+  console.log(deepEqual("", "")); // → false
+  console.log(deepEqual(obj)); // → false
+  console.log(deepEqual()); // → false
+  console.log(deepEqual(obj, { here: { is: "an" }, object: 2, toto: "Toto" })); // → false
+</script>
+</html>
