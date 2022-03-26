@@ -1,0 +1,21 @@
+<!doctype html>
+<script>
+  function drawChessboard(size = 2, subPattern = "#") {
+    let resultStr = "";
+    if (size >= 2) {
+      let middle = Math.max(1, Math.floor(size / 2));
+      for (let i = 0; i < size; i++) {
+        for (let j = 0; j < middle; j++) {
+          resultStr += i % 2 === 0 ? " " + subPattern : subPattern + " ";
+        }
+        resultStr += "\n";
+      }
+    }
+    //console.log(`${resultStr}`);
+    return `${resultStr}`;
+  }
+
+  console.log(drawChessboard(8));
+  console.log(drawChessboard(2, "*"));
+</script>
+</html>
